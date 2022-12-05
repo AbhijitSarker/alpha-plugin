@@ -1,10 +1,15 @@
 <?php
 get_header();
 
+$paged = (get_query_var('paged')) ? absint(get_query_var('paged')) : 1;
+
+
 
 $movie_args = array(
-    'post_type' => 'movie-dir',
-    'posts_per_page' => -1,
+    'post_type' => 'post',
+    'posts_per_page' => 5,
+    'paged' => $paged,
+
 );
 
 $movie_query = new WP_Query($movie_args);
@@ -47,34 +52,52 @@ if ($movie_query->have_posts()) :
                                                         ?>" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title"><?php the_title(); ?></h5>
-                            <p class="card-text"><?php echo $sliceContent; ?></p>
+                            <!-- <p class="card-text"><?php //echo $sliceContent; 
+                                                        ?></p> -->
                             <a href="<?php the_permalink(); ?>" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
 
                 </div>
             <?php endwhile;
-            wp_reset_postdata(); ?>
+
+            $total_pages = $movie_query->max_num_pages;
+
+            if ($total_pages > 1) {
+
+                $current_page = max(1, get_query_var('paged'));
+
+                echo paginate_links(array(
+                    // 'base' => get_pagenum_link(,) . '%_%',
+                    'base'               => '%_%',
+                    'format'             => '?paged=%#%',
+                    'current' => 1,
+                    'total' => 3,
+                    'prev_text'          => __('« Previous'),
+                    'next_text'          => __('Next »'),
+                    'show_all' => true,
+                    //   =
+                    //     'format' => '/page/%#%',
+                    //     'current' => $current_page,
+                    //     'total' => $total_pages,
+                    //     'prev_text'    => __('« prev'),
+                    //     'next_text'    => __('next »'),
+                ));
+            }
+
+            // wp_reset_postdata();
+            ?>
         </div>
     </div>
 
 
     <!-- show pagination here -->
+
+
 <?php else : ?>
     <!-- show 404 error here -->
 <?php endif; ?>
 
-
-
-
-
 <?php
-
-
-
-
-
-
-
 
 get_footer();
