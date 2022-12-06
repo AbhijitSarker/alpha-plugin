@@ -7,7 +7,7 @@ $paged = (get_query_var('paged')) ? absint(get_query_var('paged')) : 1;
 
 $movie_args = array(
     'post_type' => 'post',
-    'posts_per_page' => 5,
+    'posts_per_page' => 3,
     'paged' => $paged,
 
 );
@@ -50,6 +50,7 @@ if ($movie_query->have_posts()) :
 
 
                                                         ?>" alt="Card image cap">
+
                         <div class="card-body">
                             <h5 class="card-title"><?php the_title(); ?></h5>
                             <!-- <p class="card-text"><?php //echo $sliceContent; 
@@ -67,22 +68,24 @@ if ($movie_query->have_posts()) :
 
                 $current_page = max(1, get_query_var('paged'));
 
-                echo paginate_links(array(
-                    // 'base' => get_pagenum_link(,) . '%_%',
-                    'base'               => '%_%',
-                    'format'             => '?paged=%#%',
-                    'current' => 1,
-                    'total' => 3,
-                    'prev_text'          => __('« Previous'),
-                    'next_text'          => __('Next »'),
-                    'show_all' => true,
-                    //   =
-                    //     'format' => '/page/%#%',
-                    //     'current' => $current_page,
-                    //     'total' => $total_pages,
-                    //     'prev_text'    => __('« prev'),
-                    //     'next_text'    => __('next »'),
-                ));
+                echo paginate_links();
+
+                // echo paginate_links(array(
+                //     // 'base' => get_pagenum_link(,) . '%_%',
+                //     'base'               => '%_%',
+                //     'format'             => '?paged=%#%',
+                //     'current' => 1,
+                //     'total' => 3,
+                //     'prev_text'          => __('« Previous'),
+                //     'next_text'          => __('Next »'),
+                //     'show_all' => true,
+                //     //   =
+                //     //     'format' => '/page/%#%',
+                //     //     'current' => $current_page,
+                //     //     'total' => $total_pages,
+                //     //     'prev_text'    => __('« prev'),
+                //     //     'next_text'    => __('next »'),
+                // ));
             }
 
             // wp_reset_postdata();
