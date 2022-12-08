@@ -75,6 +75,8 @@ function movie_dir_func()
     register_post_type('movie-dir', $args);
 }
 
+
+
 add_action('init', 'my_rewrite_flush');
 
 function my_rewrite_flush()
@@ -99,19 +101,19 @@ function my_search_form($form)
 {
     $form = '
 
-<form id="search" action="' . home_url('/') . '" method="get">
+<form id="search" action="" method="get">
 <input type="hidden" name="post_type" value="post" />
-<input id="s" name="s" type="text" value="' . get_search_query() . '" />
+<input id="s" name="s" type="text" value="" />
 </form>';
 
     return $form;
 }
 
-add_filter('get_search_form', 'my_search_form');
+// add_filter('get_search_form', 'my_search_form');
 
-add_action('wp_enqueue_scripts', 'load_moviees_enqueue_files');
+add_action('wp_enqueue_scripts', 'load_movies_enqueue_files');
 
-function load_moviees_enqueue_files()
+function load_movies_enqueue_files()
 {
     $dir = plugin_dir_url(__FILE__);
     wp_enqueue_style('style', $dir . 'assets/css/style.css');
