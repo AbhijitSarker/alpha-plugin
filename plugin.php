@@ -76,6 +76,7 @@ function movie_dir_func()
 }
 
 add_action('init', 'my_rewrite_flush');
+
 function my_rewrite_flush()
 {
 
@@ -84,7 +85,7 @@ function my_rewrite_flush()
 
 function get_custom_post_type_template($archive_template)
 {
-    global $post;
+    // global $post;
 
     if (is_post_type_archive('movie-dir')) {
         $archive_template = dirname(__FILE__) . '/templates/post-type-template.php';
@@ -94,12 +95,27 @@ function get_custom_post_type_template($archive_template)
 
 add_filter('archive_template', 'get_custom_post_type_template');
 
+function my_search_form($form)
+{
+    $form = '
+
+<form id="search" action="' . home_url('/') . '" method="get">
+<input type="hidden" name="post_type" value="post" />
+<input id="s" name="s" type="text" value="' . get_search_query() . '" />
+</form>';
+
+    return $form;
+}
+
+add_filter('get_search_form', 'my_search_form');
+
 add_action('wp_enqueue_scripts', 'load_moviees_enqueue_files');
+
 function load_moviees_enqueue_files()
 {
     $dir = plugin_dir_url(__FILE__);
-    wp_enqueue_style('bootstrap', $dir . 'assets/css/bootstrap.min.css');
     wp_enqueue_style('style', $dir . 'assets/css/style.css');
+    wp_enqueue_style('bootstrap', $dir . 'assets/css/bootstrap.min.css');
 
     wp_enqueue_script('bootstrapjs', $dir . 'assets/css/bootstrap.min.js', [], false, true);
     wp_enqueue_script('scriptjs', $dir . 'assets/css/script.js', 'jquery', false, true);
