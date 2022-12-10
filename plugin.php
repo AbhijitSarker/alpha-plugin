@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Movie Directory
+ * Plugin Name:       Movie Archive
  * Plugin URI:        https://github.com/AbhijitSarker
  * Description:       Get latest collection of movies.
  * Version:           1.0
@@ -11,7 +11,7 @@
  * Author URI:        https://github.com/AbhijitSarker
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       movie_dir_plugin
+ * Text Domain:       movie_arch_plugin
  * Domain Path:       /languages
  */
 
@@ -19,14 +19,14 @@ if (!defined('ABSPATH')) {
     die;
 }
 
-add_action('init', 'movie_dir_func');
+add_action('init', 'movie_arch_func');
 
 /**
  * Register a custom post type called "Movie ".
  *
  * @see get_post_type_labels() for label keys.
  */
-function movie_dir_func()
+function movie_arch_func()
 {
     $labels = array(
         'name'                  => _x('Movies', 'Post type general name', 'textdomain'),
@@ -62,7 +62,7 @@ function movie_dir_func()
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-        'rewrite'            => array('slug' => 'movie-dir'),
+        'rewrite'            => array('slug' => 'movie-arch'),
         'capability_type'    => 'post',
         'has_archive'        => true,
         'menu_icon'          => 'dashicons-video-alt',
@@ -72,7 +72,7 @@ function movie_dir_func()
         'supports'           => array('title', 'editor', 'thumbnail',),
     );
 
-    register_post_type('movie-dir', $args);
+    register_post_type('movie-arch', $args);
 }
 
 
@@ -89,7 +89,7 @@ function get_custom_post_type_template($archive_template)
 {
     // global $post;
 
-    if (is_post_type_archive('movie-dir')) {
+    if (is_post_type_archive('movie-arch')) {
         $archive_template = dirname(__FILE__) . '/templates/post-type-template.php';
     }
     return $archive_template;

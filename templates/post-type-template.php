@@ -5,7 +5,7 @@ $search = $_GET['search'];
 
 
 $query = array(
-    'post_type' => 'movie-dir',
+    'post_type' => 'movie-arch',
     'posts_per_page' => 7,
     'author' => the_author_meta('id'),
     'ignore_sticky_posts' => true,
