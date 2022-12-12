@@ -1,11 +1,14 @@
 <?php
 get_header();
 
+// $search;
+// if (isset($_GET['search'])) {
 $search = $_GET['search'];
+// }
 
 
 $query = array(
-    'post_type' => 'movie-arch',
+    'post_type' => 'post',
     'posts_per_page' => 7,
     'author' => the_author_meta('id'),
     'ignore_sticky_posts' => true,
