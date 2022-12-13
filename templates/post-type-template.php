@@ -2,18 +2,18 @@
 get_header();
 
 // $search;
-// if (isset($_GET['search'])) {
-$search = $_GET['search'];
+// if (isset($_POST['search'])) {
+//     $search = $_POST['search'];
 // }
 
 
 $query = array(
-    'post_type' => 'post',
+    'post_type' => 'movie-arch',
     'posts_per_page' => 7,
     'author' => the_author_meta('id'),
     'ignore_sticky_posts' => true,
     'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
-    "s" => $search,
+    "s" => isset($_POST['search'])
 
 );
 
