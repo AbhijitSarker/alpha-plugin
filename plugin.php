@@ -116,9 +116,14 @@ add_action('wp_enqueue_scripts', 'load_movies_enqueue_files');
 function load_movies_enqueue_files()
 {
     $dir = plugin_dir_url(__FILE__);
-    wp_enqueue_style('style', $dir . 'assets/css/style.css');
     wp_enqueue_style('bootstrap', $dir . 'assets/css/bootstrap.min.css');
+    wp_enqueue_style('style', $dir . 'assets/css/style.css');
+    wp_enqueue_style('fontawsome_all', $dir . 'assets/css/all.css');
+    wp_enqueue_style('fontawsome', $dir . 'assets/css/fontawesome.css');
 
-    wp_enqueue_script('bootstrapjs', $dir . 'assets/css/bootstrap.min.js', [], false, true);
-    wp_enqueue_script('scriptjs', $dir . 'assets/css/script.js', 'jquery', false, true);
+    wp_enqueue_script('bootstrapjs', $dir . 'assets/js/bootstrap.min.js', [], false, true);
+    wp_enqueue_script('scriptjs', $dir . 'assets/js/script.js', 'jquery', false, true);
+    wp_localize_script('scriptjs', 'admin_ajax_obj', array(
+        'admin_ajax' => admin_url('admin-ajax.php')
+    ));
 }

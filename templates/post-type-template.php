@@ -1,10 +1,10 @@
 <?php
 get_header();
 
-// $search;
-// if (isset($_POST['search'])) {
-//     $search = $_POST['search'];
-// }
+
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+}
 
 
 $query = array(
@@ -13,7 +13,7 @@ $query = array(
     'author' => the_author_meta('id'),
     'ignore_sticky_posts' => true,
     'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
-    "s" => isset($_POST['search'])
+    "s" => $search
 
 );
 
@@ -28,11 +28,17 @@ if ($loop->have_posts()) :
             <div class="s130 col-sm-12">
                 <form action="" method="get">
 
-                    <input autocomplete="on" type="text" class="form-control" placeholder="Search freelancers or jobs" name="search" id="" value="">
 
-                    <div class="input-field second-wrap">
-                        <button type="submit" class="btn-search">Search</button>
+                    <div class="input-group movie-search-field">
+                        <input autocomplete="on" type="text" class="form-control" placeholder="Search freelancers or jobs" name="search" id="" value="">
+                        <button type="submit" class="btn btn-primary p-3 ajax-search-btn">
+                            <i class="fa-solid fa-search"></i>
+
+                        </button>
+
+
                     </div>
+
                 </form>
             </div>
             <div class="row">
