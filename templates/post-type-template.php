@@ -13,7 +13,7 @@ $query = array(
     'author' => the_author_meta('id'),
     'ignore_sticky_posts' => true,
     'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
-    "s" => $search
+    "s" => $search,
 
 );
 
