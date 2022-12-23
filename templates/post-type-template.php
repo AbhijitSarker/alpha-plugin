@@ -66,8 +66,8 @@ if ($loop->have_posts()) :
 
                             <div class="card-body">
                                 <h5 class="card-title"><?php the_title(); ?></h5>
-                                <!-- <p class="card-text"><?php //echo $sliceContent; 
-                                                            ?></p> -->
+                                <p class="card-text"><?php echo $sliceContent;
+                                                        ?></p>
                                 <a href="<?php the_permalink(); ?>" class="btn btn-primary">Go somewhere</a>
                             </div>
                         </div>
