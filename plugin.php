@@ -127,3 +127,27 @@ function load_movies_enqueue_files()
         'admin_ajax' => admin_url('admin-ajax.php')
     ));
 }
+
+
+//add custom tabs in single product
+add_filter('woocommerce_product_data_tabs', 'wk_custom_product_tab', 10, 1);
+
+function wk_custom_product_tab($default_tabs)
+{
+    $default_tabs['custom_tab'] = array(
+        'label'   =>  __('Custom Tab', 'domain'),
+        'target'  =>  'wk_custom_tab_data',
+        'priority' => 60,
+        'class'   => array()
+    );
+    return $default_tabs;
+}
+
+
+
+add_action('woocommerce_product_data_panels', 'wk_custom_tab_data');
+
+function wk_custom_tab_data()
+{
+    echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
+}
